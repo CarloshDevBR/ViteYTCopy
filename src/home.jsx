@@ -1,45 +1,64 @@
 import { makeStyles } from '@mui/styles'
 
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import VideoCallRoundedIcon from '@mui/icons-material/VideoCallRounded';
 import MenuIcon from '@mui/icons-material/Menu';
+import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
+import Apps from '@mui/icons-material/Apps';
+
+import { Grid, AppBar, Toolbar, Button, IconButton } from '@mui/material';
 
 const useStyles = makeStyles({
-    root: {
-      height: '100vh',
-    }
-  })
+    icons: {
+        marginRight: 15,
+    },
+})
 
 function Home() {
     const classes = useStyles()
 
     return (
-        <div className={classes.root} >
-            <Box sx={{ flexGrow: 1 }}>
-                <AppBar color="inherit">
-                    <Toolbar>
+        <div sx={{ height: '100vh' }} >
+            <AppBar color="inherit" sx={{ boxShadow: 'none' }}>
+                <Toolbar>
 
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
+                <IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ mr: 2 }}
+                >
+                    <MenuIcon />
+                </IconButton>
+
+                <Grid
+                    container
+                    direction="row"
+                    justifyContent="flex-end"
+                    alignItems="center"
+                > 
+                    <IconButton>
+                        <VideoCallRoundedIcon className={classes.icons} />
                     </IconButton>
 
-                    <Typography variant="h6">News</Typography>
+                    <IconButton>
+                        <Apps className={classes.icons} />
+                    </IconButton>
 
-                    <Button color="inherit">LOGIN</Button>
+                    <IconButton>
+                        <MoreVertRoundedIcon className={classes.icons} />
+                    </IconButton>
 
-                    </Toolbar>
-                </AppBar>
-            </Box>
+                    <Button 
+                        color="primary" 
+                        variant="outlined" 
+                        startIcon={<AccountCircleIcon />}
+                    >FAZER LOGIN</Button>
+                </Grid>
+
+                </Toolbar>
+            </AppBar>
         </div>
   )
 }
