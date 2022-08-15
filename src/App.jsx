@@ -5,7 +5,7 @@ import Home from './home.jsx'
 const theme = createTheme({
     secondary: {
       main: "#e41b1b"
-    }
+    },
   }
 );
 
