@@ -30,7 +30,7 @@ const useStyles = makeStyles({
     },
     drawerPaper: {
       width: 240,
-      borderRight: 'none',
+      
     },
 })
 
