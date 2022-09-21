@@ -5,16 +5,19 @@ import VideoCallRoundedIcon from '@mui/icons-material/VideoCallRounded';
 import MenuIcon from '@mui/icons-material/Menu';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import Apps from '@mui/icons-material/Apps';
-import ListItemIcon from '@mui/icons-material/List';
 import HomeIcon from '@mui/icons-material/Home';
 import Whatshot from '@mui/icons-material/Whatshot';
 import Subscriptions from '@mui/icons-material/Subscriptions';
+import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 
 import logoDark from './assets/preto.png'
 
-import { Grid, AppBar, Toolbar, Button, Box, Drawer, IconButton,
-        List, Divider, ListItem, ListItemText,
+import { 
+  Grid, AppBar, Toolbar, Button, Box, Drawer, IconButton,
+  List, Divider, ListItem, ListItemText,
 } from '@mui/material';
+
+import { useState } from 'react';
 
 const useStyles = makeStyles({
     root: {
@@ -28,14 +31,15 @@ const useStyles = makeStyles({
       flexShrink: 0,
       zIndex: 0
     },
-    drawerPaper: {
-      width: 240,
-      
-    },
+    listItemText: {
+      fontSize:'0.7em',
+    }
 })
 
 function Home() {
     const classes = useStyles()
+
+    const [ state, setState ] = useState(false)
 
     return (
         <Box sx={{ height: '100vh' }} className={classes.root} >
@@ -92,69 +96,61 @@ function Home() {
 
             <Drawer
                 className={classes.drawer}
-                variant='permanent'
-                classes={{
-                    paper: classes.drawerPaper,
+                variant='permanent'  
+                PaperProps={{
+                  sx: {
+                    width: 240,
+                    borderRight: 'none',
+                  }
                 }}
-                sx={{ position: 'absolute' }}
+                sx={{ 
+                  position: 'absolute',
+                }}
             >
               <Toolbar />
 
               <Box>
                 <List>
-                  <ListItem button>
-                    <ListItemIcon>
-                      {<HomeIcon />}
-                    </ListItemIcon>
+                    <ListItem button sx={{ gap: 3, paddingTop: "4px", paddingBottom: "4px" }}>    
+                      <HomeIcon />         
 
-                    <ListItemText primary={'Início'} />
-                  </ListItem>
+                      <ListItemText insert primary="Início" sx={{ fontSize: "14px" }} disableTypography />
 
-                  <ListItem button>
-                    <ListItemIcon>
-                      {<Whatshot />}
-                    </ListItemIcon>
-                    
-                    <ListItemText primary={'Em alta'} />
-                  </ListItem>
+                    </ListItem>
 
-                  <ListItem button>
-                    <ListItemIcon>
-                      {<Subscriptions />}
-                    </ListItemIcon>
+                    <ListItem button sx={{ gap: 3, paddingTop: "4px", paddingBottom: "4px" }} >
+                      <Whatshot />
 
-                    <ListItemText primary={'Inscrições'} />
-                  </ListItem>
+                      <ListItemText insert primary="Em alta" sx={{ fontSize: "14px" }} disableTypography />
+
+                    </ListItem>
+
+                    <ListItem button sx={{ gap: 3, paddingTop: "4px", paddingBottom: "4px" }} >
+                      <Subscriptions />
+
+                      <ListItemText insert primary="Inscrições" sx={{ fontSize: "14px" }} disableTypography />
+
+                    </ListItem>
                 </List>
-              
-              <Divider sx={{ width: '95%' }} />
+                
+                <Divider sx={{ width: '95%' }} />
 
                 <List>
-                    <ListItem button>
-                      <ListItemIcon>
-                        {<HomeIcon />}
-                      </ListItemIcon>
+                    <ListItem button sx={{ gap: 3, paddingTop: "4px", paddingBottom: "4px" }}>    
+                      <VideoLibraryIcon />         
 
-                      <ListItemText primary={'Início'} />
+                      <ListItemText insert primary="Biblioteca" sx={{ fontSize: "14px" }} disableTypography />
+
                     </ListItem>
 
-                    <ListItem button>
-                      <ListItemIcon>
-                        {<Whatshot />}
-                      </ListItemIcon>
-                      
-                      <ListItemText primary={'Em alta'} />
-                    </ListItem>
+                    <ListItem button sx={{ gap: 3, paddingTop: "4px", paddingBottom: "4px" }} >
+                      <Whatshot />
 
-                    <ListItem button>
-                      <ListItemIcon>
-                        {<Subscriptions />}
-                      </ListItemIcon>
+                      <ListItemText insert primary="Em alta" sx={{ fontSize: "14px" }} disableTypography />
 
-                      <ListItemText primary={'Inscrições'} />
                     </ListItem>
                 </List>
-                  </Box>
+              </Box>
             </Drawer>
         </Box>
   )
