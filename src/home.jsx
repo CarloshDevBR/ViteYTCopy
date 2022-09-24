@@ -1,5 +1,3 @@
-import { makeStyles } from '@mui/styles'
-
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import VideoCallRoundedIcon from '@mui/icons-material/VideoCallRounded';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -9,40 +7,45 @@ import HomeIcon from '@mui/icons-material/Home';
 import Whatshot from '@mui/icons-material/Whatshot';
 import Subscriptions from '@mui/icons-material/Subscriptions';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
+import HistoryIcon from '@mui/icons-material/History';
+import AddCircle from '@mui/icons-material/AddCircle';
 
 import logoDark from './assets/preto.png'
 
 import { 
   Grid, AppBar, Toolbar, Button, Box, Drawer, IconButton,
-  List, Divider, ListItem, ListItemText,
+  List, Divider, ListItem, ListItemText, Typography, ListSubheader
 } from '@mui/material';
 
-import { useState } from 'react';
-
-const useStyles = makeStyles({
-    root: {
-      backgroundColor: '#f9f9f9',
-    },
-    icons: {
-        marginRight: 15,
-    },
-    drawer: {
-      width: 240,
-      flexShrink: 0,
-      zIndex: 0
-    },
-    listItemText: {
-      fontSize:'0.7em',
-    }
-})
+import { useState } from "react"
 
 function Home() {
-    const classes = useStyles()
+    const [ openDrawer, setOpenDrawer ] = useState(false)
 
-    const [ state, setState ] = useState(false)
+    const root = {
+      height: "100vh",
+      backgroundColor: "#f9f9f9"
+    }
+
+    const iconsMarginRight = "15px"
+    
+    const sizeListText = "14px"
+
+    const drawer = {
+      width: 240,
+      flexShrink: 0,
+      zIndex: 0,
+      position: "absolute",
+    }
+
+    const listItem = {
+      gap: 2, 
+      paddingTop: "4px", 
+      paddingBottom: "4px"
+    }
 
     return (
-        <Box sx={{ height: '100vh' }} className={classes.root} >
+        <Box sx={{ ...root }} >
             <AppBar color="inherit" sx={{ 
                 boxShadow: 'none',
                 zIndex: 1, 
@@ -55,6 +58,7 @@ function Home() {
                     color="inherit"
                     aria-label="menu"
                     sx={{ mr: 2 }}
+                    onClick={() => setOpenDrawer(!openDrawer)}
                 >
                     <MenuIcon />
                 </IconButton>
@@ -73,15 +77,15 @@ function Home() {
                     alignItems="center"
                 > 
                     <IconButton>
-                        <VideoCallRoundedIcon className={classes.icons} />
+                        <VideoCallRoundedIcon sx={{ marginRight: iconsMarginRight }} />
                     </IconButton>
 
                     <IconButton>
-                        <Apps className={classes.icons} />
+                        <Apps sx={{ marginRight: iconsMarginRight }} />
                     </IconButton>
 
                     <IconButton>
-                        <MoreVertRoundedIcon className={classes.icons} />
+                        <MoreVertRoundedIcon sx={{ marginRight: iconsMarginRight }} />
                     </IconButton>
 
                     <Button 
@@ -95,40 +99,38 @@ function Home() {
             </AppBar>
 
             <Drawer
-                className={classes.drawer}
-                variant='permanent'  
+                temporary
+                open={openDrawer}
                 PaperProps={{
                   sx: {
                     width: 240,
                     borderRight: 'none',
                   }
                 }}
-                sx={{ 
-                  position: 'absolute',
-                }}
+                sx={{ ...drawer }}
             >
               <Toolbar />
 
               <Box>
                 <List>
-                    <ListItem button sx={{ gap: 3, paddingTop: "4px", paddingBottom: "4px" }}>    
+                    <ListItem button sx={{ ...listItem }}>    
                       <HomeIcon />         
 
-                      <ListItemText insert primary="Início" sx={{ fontSize: "14px" }} disableTypography />
+                      <ListItemText insert primary="Início" sx={{ fontSize: sizeListText }} disableTypography />
 
                     </ListItem>
 
-                    <ListItem button sx={{ gap: 3, paddingTop: "4px", paddingBottom: "4px" }} >
+                    <ListItem button sx={{ ...listItem }} >
                       <Whatshot />
 
-                      <ListItemText insert primary="Em alta" sx={{ fontSize: "14px" }} disableTypography />
+                      <ListItemText insert primary="Em alta" sx={{ fontSize: sizeListText }} disableTypography />
 
                     </ListItem>
 
-                    <ListItem button sx={{ gap: 3, paddingTop: "4px", paddingBottom: "4px" }} >
+                    <ListItem button sx={{ ...listItem }} >
                       <Subscriptions />
 
-                      <ListItemText insert primary="Inscrições" sx={{ fontSize: "14px" }} disableTypography />
+                      <ListItemText insert primary="Inscrições" sx={{ fontSize: sizeListText }} disableTypography />
 
                     </ListItem>
                 </List>
@@ -136,20 +138,101 @@ function Home() {
                 <Divider sx={{ width: '95%' }} />
 
                 <List>
-                    <ListItem button sx={{ gap: 3, paddingTop: "4px", paddingBottom: "4px" }}>    
+                    <ListItem button sx={{ ...listItem }}>    
                       <VideoLibraryIcon />         
 
-                      <ListItemText insert primary="Biblioteca" sx={{ fontSize: "14px" }} disableTypography />
+                      <ListItemText insert primary="Biblioteca" sx={{ fontSize: sizeListText }} disableTypography />
 
                     </ListItem>
 
-                    <ListItem button sx={{ gap: 3, paddingTop: "4px", paddingBottom: "4px" }} >
-                      <Whatshot />
+                    <ListItem button sx={{ ...listItem }}>
+                      <HistoryIcon />
 
-                      <ListItemText insert primary="Em alta" sx={{ fontSize: "14px" }} disableTypography />
+                      <ListItemText insert primary="Histórico" sx={{ fontSize: sizeListText }} disableTypography />
 
                     </ListItem>
                 </List>
+                
+                <Divider sx={{ width: '95%' }} />
+
+                <Box p={3}>
+                  <Typography
+                    variant="body2"
+                  >
+                    Faça login para curtir vídeos, comentar e se inscrever.
+                  </Typography>
+                  <Box mt={2}>
+                    <Button
+                      size="small"
+                      variant="outlined"
+                      color="primary"
+                      startIcon={<AccountCircleIcon />}
+                    >Fazer Login</Button>
+                  </Box>
+                </Box>
+
+                <Divider sx={{ width: '95%' }} />
+
+                <List
+                  component='nav'
+                  aria-labelledby='nested-list-subheader'
+                  subheader={
+                    <ListSubheader
+                      component='div'
+                      id='nested-list-subheader'
+                    >
+                      O Melhor do youtube
+                    </ListSubheader>
+                  }
+                >
+                <ListItem button sx={{ ...listItem }}>
+                  <AddCircle />
+                  <ListItemText sx={{ fontSize: sizeListText }} primary={'Música'} disableTypography />
+                </ListItem>
+
+                <ListItem button sx={{ ...listItem }}>
+                  <AddCircle />
+                  <ListItemText sx={{ fontSize: sizeListText }} primary={'Esportes'} disableTypography />
+                </ListItem>
+
+                <ListItem button sx={{ ...listItem }}>
+                  <AddCircle />
+                  <ListItemText sx={{ fontSize: sizeListText }} primary={'Jogos'} disableTypography />
+                </ListItem>
+
+                <ListItem button sx={{ ...listItem }}>
+                  <AddCircle />
+                  <ListItemText sx={{ fontSize: sizeListText }} primary={'Filmes'} disableTypography />
+                </ListItem>
+
+                <ListItem button sx={{ ...listItem }}>
+                  <AddCircle />
+                  <ListItemText sx={{ fontSize: sizeListText }} primary={'Notícias'} disableTypography />
+                </ListItem>
+
+                <ListItem button sx={{ ...listItem }}>
+                  <AddCircle />
+                  <ListItemText sx={{ fontSize: sizeListText }} primary={'Ao vivo'} disableTypography />
+                </ListItem>
+
+                <ListItem button sx={{ ...listItem }}>
+                  <AddCircle />
+                  <ListItemText sx={{ fontSize: sizeListText }} primary={'Destaques'} disableTypography />
+                </ListItem>
+
+                <ListItem button sx={{ ...listItem }}>
+                  <AddCircle />
+                  <ListItemText sx={{ fontSize: sizeListText }} primary={'Videos 360'} disableTypography />
+                </ListItem>
+              </List>
+
+              <Divider />
+
+              <ListItem button sx={{ ...listItem }}>
+                  <AddCircle />
+                  <ListItemText sx={{ fontSize: sizeListText }} primary={'Procurar mais'} disableTypography />
+              </ListItem>
+
               </Box>
             </Drawer>
         </Box>
