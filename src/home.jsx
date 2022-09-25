@@ -10,6 +10,8 @@ import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import HistoryIcon from '@mui/icons-material/History';
 import AddCircle from '@mui/icons-material/AddCircle';
 
+import { makeStyles } from "@mui/styles";
+
 import logoDark from './assets/preto.png'
 
 import { 
@@ -19,33 +21,37 @@ import {
 
 import { useState } from "react"
 
+const useStyles = makeStyles({
+  root: {
+    height: "100vh",
+    backgroundColor: "#f9f9f9"
+  },
+  icons: {
+    marginRight: "15px"
+  },
+  listItemText: {
+    fontSize: "14px"
+  },
+  listItem: {
+    gap: 2, 
+    paddingTop: "4px", 
+    paddingBottom: "4px"
+  },
+  drawer: {
+    width: 240,
+    flexShrink: 0,
+    zIndex: 0,
+    position: "absolute"
+  }
+});
+
 function Home() {
     const [ openDrawer, setOpenDrawer ] = useState(false)
 
-    const root = {
-      height: "100vh",
-      backgroundColor: "#f9f9f9"
-    }
-
-    const iconsMarginRight = "15px"
-    
-    const sizeListText = "14px"
-
-    const drawer = {
-      width: 240,
-      flexShrink: 0,
-      zIndex: 0,
-      position: "absolute",
-    }
-
-    const listItem = {
-      gap: 2, 
-      paddingTop: "4px", 
-      paddingBottom: "4px"
-    }
+    const classes = useStyles()
 
     return (
-        <Box sx={{ ...root }} >
+        <Box className={classes.root} >
             <AppBar color="inherit" sx={{ 
                 boxShadow: 'none',
                 zIndex: 1, 
@@ -77,15 +83,15 @@ function Home() {
                     alignItems="center"
                 > 
                     <IconButton>
-                        <VideoCallRoundedIcon sx={{ marginRight: iconsMarginRight }} />
+                        <VideoCallRoundedIcon className={classes.icons} />
                     </IconButton>
 
                     <IconButton>
-                        <Apps sx={{ marginRight: iconsMarginRight }} />
+                        <Apps className={classes.icons} />
                     </IconButton>
 
                     <IconButton>
-                        <MoreVertRoundedIcon sx={{ marginRight: iconsMarginRight }} />
+                        <MoreVertRoundedIcon className={classes.icons} />
                     </IconButton>
 
                     <Button 
@@ -107,30 +113,49 @@ function Home() {
                     borderRight: 'none',
                   }
                 }}
-                sx={{ ...drawer }}
-            >
-              <Toolbar />
+                className={classes.drawer}
+            > 
+              <Box display="flex" mt="5px" pl="24px" justifyContent="center" sx={{ justifyContent: "flex-start" }}>
+                <IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ mr: 2 }}
+                    onClick={() => setOpenDrawer(!openDrawer)}
+                >
+                    <MenuIcon />
+                </IconButton>
+
+                <Box
+                    component="img"
+                    style={{ alignSelf: "center"}}
+                    sx={{ height: 30, zIndex: 1 }}
+                    alt="logoDark"
+                    src={logoDark}
+                />
+              </Box>
 
               <Box>
                 <List>
-                    <ListItem button sx={{ ...listItem }}>    
+                    <ListItem button className={classes.listItem}>    
                       <HomeIcon />         
 
-                      <ListItemText insert primary="Início" sx={{ fontSize: sizeListText }} disableTypography />
+                      <ListItemText insert primary="Início" className={classes.listItemText} disableTypography />
 
                     </ListItem>
 
-                    <ListItem button sx={{ ...listItem }} >
+                    <ListItem button className={classes.listItem} >
                       <Whatshot />
 
-                      <ListItemText insert primary="Em alta" sx={{ fontSize: sizeListText }} disableTypography />
+                      <ListItemText insert primary="Em alta" className={classes.listItemText} disableTypography />
 
                     </ListItem>
 
-                    <ListItem button sx={{ ...listItem }} >
+                    <ListItem button className={classes.listItem} >
                       <Subscriptions />
 
-                      <ListItemText insert primary="Inscrições" sx={{ fontSize: sizeListText }} disableTypography />
+                      <ListItemText insert primary="Inscrições" className={classes.listItemText} disableTypography />
 
                     </ListItem>
                 </List>
@@ -138,17 +163,17 @@ function Home() {
                 <Divider sx={{ width: '95%' }} />
 
                 <List>
-                    <ListItem button sx={{ ...listItem }}>    
+                    <ListItem button className={classes.listItem}>    
                       <VideoLibraryIcon />         
 
-                      <ListItemText insert primary="Biblioteca" sx={{ fontSize: sizeListText }} disableTypography />
+                      <ListItemText insert primary="Biblioteca" className={classes.listItemText} disableTypography />
 
                     </ListItem>
 
-                    <ListItem button sx={{ ...listItem }}>
+                    <ListItem button className={classes.listItem}>
                       <HistoryIcon />
 
-                      <ListItemText insert primary="Histórico" sx={{ fontSize: sizeListText }} disableTypography />
+                      <ListItemText insert primary="Histórico" className={classes.listItemText} disableTypography />
 
                     </ListItem>
                 </List>
@@ -185,52 +210,52 @@ function Home() {
                     </ListSubheader>
                   }
                 >
-                <ListItem button sx={{ ...listItem }}>
+                <ListItem button className={classes.listItem}>
                   <AddCircle />
-                  <ListItemText sx={{ fontSize: sizeListText }} primary={'Música'} disableTypography />
+                  <ListItemText className={classes.listItemText} primary={'Música'} disableTypography />
                 </ListItem>
 
-                <ListItem button sx={{ ...listItem }}>
+                <ListItem button className={classes.listItem}>
                   <AddCircle />
-                  <ListItemText sx={{ fontSize: sizeListText }} primary={'Esportes'} disableTypography />
+                  <ListItemText className={classes.listItemText} primary={'Esportes'} disableTypography />
                 </ListItem>
 
-                <ListItem button sx={{ ...listItem }}>
+                <ListItem button className={classes.listItem}>
                   <AddCircle />
-                  <ListItemText sx={{ fontSize: sizeListText }} primary={'Jogos'} disableTypography />
+                  <ListItemText className={classes.listItemText} primary={'Jogos'} disableTypography />
                 </ListItem>
 
-                <ListItem button sx={{ ...listItem }}>
+                <ListItem button className={classes.listItem}>
                   <AddCircle />
-                  <ListItemText sx={{ fontSize: sizeListText }} primary={'Filmes'} disableTypography />
+                  <ListItemText className={classes.listItemText} primary={'Filmes'} disableTypography />
                 </ListItem>
 
-                <ListItem button sx={{ ...listItem }}>
+                <ListItem button className={classes.listItem}>
                   <AddCircle />
-                  <ListItemText sx={{ fontSize: sizeListText }} primary={'Notícias'} disableTypography />
+                  <ListItemText className={classes.listItemText} primary={'Notícias'} disableTypography />
                 </ListItem>
 
-                <ListItem button sx={{ ...listItem }}>
+                <ListItem button className={classes.listItem}>
                   <AddCircle />
-                  <ListItemText sx={{ fontSize: sizeListText }} primary={'Ao vivo'} disableTypography />
+                  <ListItemText className={classes.listItemText} primary={'Ao vivo'} disableTypography />
                 </ListItem>
 
-                <ListItem button sx={{ ...listItem }}>
+                <ListItem button className={classes.listItem}>
                   <AddCircle />
-                  <ListItemText sx={{ fontSize: sizeListText }} primary={'Destaques'} disableTypography />
+                  <ListItemText className={classes.listItemText} primary={'Destaques'} disableTypography />
                 </ListItem>
 
-                <ListItem button sx={{ ...listItem }}>
+                <ListItem button className={classes.listItem}>
                   <AddCircle />
-                  <ListItemText sx={{ fontSize: sizeListText }} primary={'Videos 360'} disableTypography />
+                  <ListItemText className={classes.listItemText} primary={'Videos 360'} disableTypography />
                 </ListItem>
               </List>
 
               <Divider />
 
-              <ListItem button sx={{ ...listItem }}>
+              <ListItem button className={classes.listItem}>
                   <AddCircle />
-                  <ListItemText sx={{ fontSize: sizeListText }} primary={'Procurar mais'} disableTypography />
+                  <ListItemText className={classes.listItemText} primary={'Procurar mais'} disableTypography />
               </ListItem>
 
               </Box>
