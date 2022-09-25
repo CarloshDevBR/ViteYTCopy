@@ -17,7 +17,7 @@ import logoLight from './assets/branco.png'
 
 import { 
   Grid, AppBar, Toolbar, Button, Box, Drawer, IconButton,
-  List, Divider, ListItem, ListItemText, Typography, ListSubheader, Hidden
+  List, Divider, ListItem, ListItemText, Typography, ListSubheader, Hidden, Switch
 } from '@mui/material';
 
 import { useState } from "react";
@@ -90,7 +90,12 @@ function Home({ darkMode, setDarkMode }) {
                       direction="row"
                       justifyContent="flex-end"
                       alignItems="center"
-                  > 
+                  >
+                      <Switch
+                        color="default"
+                        onChange={() => setDarkMode(!darkMode)}
+                      />
+                      
                       <IconButton>
                           <VideoCallRoundedIcon className={classes.icons} />
                       </IconButton>
