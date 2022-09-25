@@ -10,21 +10,23 @@ import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import HistoryIcon from '@mui/icons-material/History';
 import AddCircle from '@mui/icons-material/AddCircle';
 
-import { makeStyles } from "@mui/styles";
+import { makeStyles, useTheme } from "@mui/styles";
 
-import logoDark from './assets/preto.png'
+import logoDark from './assets/preto.png';
 
 import { 
   Grid, AppBar, Toolbar, Button, Box, Drawer, IconButton,
-  List, Divider, ListItem, ListItemText, Typography, ListSubheader
+  List, Divider, ListItem, ListItemText, Typography, ListSubheader, Hidden
 } from '@mui/material';
 
-import { useState } from "react"
+import { useState } from "react";
 
-const useStyles = makeStyles({
+import { videos } from './data';
+
+const useStyles = makeStyles(() => ({
   root: {
     height: "100vh",
-    backgroundColor: "#f9f9f9"
+    backgroundColor: '#181818'
   },
   icons: {
     marginRight: "15px"
@@ -33,22 +35,27 @@ const useStyles = makeStyles({
     fontSize: "14px"
   },
   listItem: {
-    gap: 2, 
+    display: "flex",
+    gap: "30px", 
     paddingTop: "4px", 
     paddingBottom: "4px"
   },
   drawer: {
     width: 240,
     flexShrink: 0,
-    zIndex: 0,
+    zIndex: 1,
     position: "absolute"
+  },
+  subHeader: {
+    textTransform: "uppercase",
   }
-});
+}));
 
 function Home() {
     const [ openDrawer, setOpenDrawer ] = useState(false)
 
     const classes = useStyles()
+    const theme = useTheme()
 
     return (
         <Box className={classes.root} >
@@ -76,34 +83,36 @@ function Home() {
                     src={logoDark}
                 />
                 
-                <Grid
-                    container
-                    direction="row"
-                    justifyContent="flex-end"
-                    alignItems="center"
-                > 
-                    <IconButton>
-                        <VideoCallRoundedIcon className={classes.icons} />
-                    </IconButton>
+                <Hidden mdDown>
+                  <Grid
+                      container
+                      direction="row"
+                      justifyContent="flex-end"
+                      alignItems="center"
+                  > 
+                      <IconButton>
+                          <VideoCallRoundedIcon className={classes.icons} />
+                      </IconButton>
 
-                    <IconButton>
-                        <Apps className={classes.icons} />
-                    </IconButton>
+                      <IconButton>
+                          <Apps className={classes.icons} />
+                      </IconButton>
 
-                    <IconButton>
-                        <MoreVertRoundedIcon className={classes.icons} />
-                    </IconButton>
+                      <IconButton>
+                          <MoreVertRoundedIcon className={classes.icons} />
+                      </IconButton>
 
-                    <Button 
-                        color="primary" 
-                        variant="outlined"
-                        startIcon={<AccountCircleIcon />}
-                    >FAZER LOGIN</Button>
-                </Grid>
+                      <Button 
+                          color="primary" 
+                          variant="outlined"
+                          startIcon={<AccountCircleIcon />}
+                      >FAZER LOGIN</Button>
+                  </Grid>
+                </Hidden>
 
                 </Toolbar>
             </AppBar>
-
+                    
             <Drawer
                 temporary
                 open={openDrawer}
@@ -136,7 +145,7 @@ function Home() {
                 />
               </Box>
 
-              <Box>
+              <Box ml="8px">
                 <List>
                     <ListItem button className={classes.listItem}>    
                       <HomeIcon />         
@@ -205,6 +214,8 @@ function Home() {
                     <ListSubheader
                       component='div'
                       id='nested-list-subheader'
+                      className={classes.subHeader}
+                      disableSticky={true}
                     >
                       O Melhor do youtube
                     </ListSubheader>
@@ -259,7 +270,54 @@ function Home() {
               </ListItem>
 
               </Box>
-            </Drawer>
+            </Drawer>                 
+
+            <Box p={4}>
+              <Toolbar />
+
+              <Typography
+                variant="h5"
+                color="textPrimary"
+                sx={{ fontWeight: 600 }}
+              >Recomendados</Typography>
+            
+
+              <Grid container spacing={3}>
+                  {
+                    videos.map(e => (
+                      <Grid item lg={3} md={4} sm={6} sx={12}>
+                        <Box key={e.id}>
+                          <img
+                            style={{ width: '100%' }}
+                            alt={e.title}
+                            src={e.thumb}
+                          />
+                          <Box>
+                            <Typography
+                              style={{ fontWeight: 600 }}
+                              gutterBottom
+                              variant='body1'
+                              color='textPrimary'
+                            >
+                              {e.title}
+                            </Typography>
+                            <Typography
+                              display='block'
+                              variant='body2'
+                              color='textSecondary'
+                            >
+                              {e.channel}
+                            </Typography>
+                            <Typography variant='body2' color='textSecondary'>
+                              {`${e.views} • ${e.date}`}
+                            </Typography>
+                          </Box>
+                        </Box>
+                      </Grid>
+                    ))
+                  }
+              </Grid>
+            </Box>
         </Box>
   )
 }

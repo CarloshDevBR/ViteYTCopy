@@ -1,20 +1,27 @@
-import { ThemeProvider, createTheme } from '@mui/material'
+import { ThemeProvider, createTheme, StyledEngineProvider } from '@mui/material'
 
 import Home from './home.jsx'
 
 const theme = createTheme({
-    secondary: {
-      main: "#e41b1b"
-    },
+  palette: {
+    mode: "dark",
+  },
+  background: {
+    default: '#232323',
+    dark: '#f4f6f8',
+    paper: '#232323',
+  },
   }
 );
 
 function App() {
 
   return (
-    <ThemeProvider theme={theme} >
-      <Home />
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme} >
+        <Home />
+      </ThemeProvider>
+    </StyledEngineProvider>
   )
 }
 
