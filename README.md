@@ -10,6 +10,10 @@
 
 ![FireShot Capture 005 - Vite + React - 127 0 0 1](https://user-images.githubusercontent.com/92805039/192128046-3cfbaad8-62ea-4a53-b54e-b60b7cb845bd.png)
 
+<p align="center" >This design was made in vite along with javascript and ui v5 material, making the most of what the ui v5 material has to offer. I decided to use vite in this project because I was interested in the speed that vite offers in the compilation, compared to the create-react-app, Vite is much better, having a 14x faster build and the size is considerably smaller. It's definitely a great option for creating personal projects.</p>
+
+
+
 <br>
 
 ### 🛠️ technologies used
