@@ -1,25 +1,27 @@
 import { ThemeProvider, createTheme, StyledEngineProvider } from '@mui/material'
+import { useState } from 'react';
 
 import Home from './home.jsx'
 
-const theme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-  background: {
-    default: '#232323',
-    dark: '#f4f6f8',
-    paper: '#232323',
-  },
-  }
-);
-
 function App() {
+  const [ darkMode, setDarkMode ] = useState(true)
+
+  const theme = createTheme({
+    palette: {
+      mode: darkMode ? 'dark' : 'light',
+    },
+    background: {
+      default: darkMode ? '#232323' : '#FFF',
+      dark: darkMode ? '#181818' : '#f4f6f8',
+      paper: darkMode ? '#232323' : '#FFF',
+    },
+    }
+  );
 
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme} >
-        <Home />
+        <Home darkMode={darkMode} setDarkMode={setDarkMode} />
       </ThemeProvider>
     </StyledEngineProvider>
   )

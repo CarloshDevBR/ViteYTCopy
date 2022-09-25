@@ -10,9 +10,10 @@ import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import HistoryIcon from '@mui/icons-material/History';
 import AddCircle from '@mui/icons-material/AddCircle';
 
-import { makeStyles, useTheme } from "@mui/styles";
+import { makeStyles } from "@mui/styles";
 
 import logoDark from './assets/preto.png';
+import logoLight from './assets/branco.png'
 
 import { 
   Grid, AppBar, Toolbar, Button, Box, Drawer, IconButton,
@@ -25,8 +26,8 @@ import { videos } from './data';
 
 const useStyles = makeStyles(() => ({
   root: {
-    height: "100vh",
-    backgroundColor: '#181818'
+    height: "100%",
+    minHeight: "100vh"
   },
   icons: {
     marginRight: "15px"
@@ -43,25 +44,25 @@ const useStyles = makeStyles(() => ({
   drawer: {
     width: 240,
     flexShrink: 0,
-    zIndex: 1,
-    position: "absolute"
+    position: "absolute",
   },
   subHeader: {
     textTransform: "uppercase",
   }
 }));
 
-function Home() {
+function Home({ darkMode, setDarkMode }) {
     const [ openDrawer, setOpenDrawer ] = useState(false)
 
     const classes = useStyles()
-    const theme = useTheme()
 
     return (
-        <Box className={classes.root} >
+        <Box className={classes.root} sx={{
+          backgroundColor: darkMode ? "#181818" : "#f4f6f8",
+        }} >
             <AppBar color="inherit" sx={{ 
-                boxShadow: 'none',
-                zIndex: 1, 
+                boxShadow: "none",
+                zIndex: 0
               }} >
                 <Toolbar>
 
@@ -80,7 +81,7 @@ function Home() {
                     component="img"
                     sx={{ height: 30, zIndex: 1 }}
                     alt="logoDark"
-                    src={logoDark}
+                    src={darkMode ? logoLight : logoDark }
                 />
                 
                 <Hidden mdDown>
@@ -141,7 +142,7 @@ function Home() {
                     style={{ alignSelf: "center"}}
                     sx={{ height: 30, zIndex: 1 }}
                     alt="logoDark"
-                    src={logoDark}
+                    src={darkMode ? logoLight : logoDark }
                 />
               </Box>
 
